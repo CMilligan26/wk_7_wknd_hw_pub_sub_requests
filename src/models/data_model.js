@@ -5,11 +5,11 @@ const DataModel = function (url, dataToCollect) {
   this.url = url;
   this.dataToCollect = dataToCollect;
   this.data = null;
+  this.requestHelper = new RequestHelper();
 }
 
 DataModel.prototype.getData = function () {
-  requestHelper = new RequestHelper();
-  requestHelper.get(this.url).then((data) => {
+  this.requestHelper.get(this.url).then((data) => {
     this.data = data;
     const dataToSend = this.extractData();
     PubSub.publish("DataModel:data-ready", dataToSend);
