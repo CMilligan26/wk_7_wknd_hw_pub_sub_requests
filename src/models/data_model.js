@@ -12,7 +12,7 @@ DataModel.prototype.getData = function () {
   this.requestHelper.get(this.url).then((data) => {
     this.data = data;
     const dataToSend = this.extractData();
-    PubSub.publish("DataModel:data-ready", dataToSend);
+    PubSub.publish("DataModel:extracted-data-ready", dataToSend);
   });
 };
 

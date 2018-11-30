@@ -1,11 +1,11 @@
-const Page = function (title, header) {
-  this.title = title;
-  this.header = header;
+const Page = function (elementsToSet) {
+  this.elementsToSet = elementsToSet;
 }
 
 Page.prototype.setPageDetails = function () {
-  this.setText('.custom_title', this.title);
-  this.setText('.custom_header', this.header);
+  for (element of this.elementsToSet) {
+  this.setText(element[0], element[1]);
+  }
 };
 
 Page.prototype.setText = function (element, text) {
