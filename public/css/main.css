@@ -1,10 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 header {
+  width: 100vw;
+}
+
+header * {
   display: block;
   text-align: center;
   width: 100%;
+  margin: 1em 0 1em 0;
+  font-size: 3em;
 }
 
 img {
-  width: 10%;
-  height: 10%;
+  width: auto;
+  height: 15em;
+}
+
+.data_container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.data_item {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 15em;
+  height: 22em;
+  border-style: solid;
+  border-width: small;
+  border-color: black;
+  margin: 1em;
+}
+
+.data_item_detail {
+  display: block;
+  width: 100%;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
 }

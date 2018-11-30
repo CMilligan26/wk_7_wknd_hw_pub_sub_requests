@@ -4,9 +4,7 @@ const DataObject = require('./data_object.js');
 
 const DataList = function (container) {
   this.container = document.querySelector(`.${container}`);
-  this.container.style.display = 'flex';
-  this.container.style.display = 'flex';
-  this.container.style.display = 'flex';
+  this.container.className += ' data_container';
   this.dataObject = new DataObject();
 }
 
