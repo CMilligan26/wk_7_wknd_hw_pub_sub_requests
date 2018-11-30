@@ -8,8 +8,8 @@ const DataModel = function (url, dataToCollect) {
 }
 
 DataModel.prototype.getData = function () {
-  debugger;
-  RequestHelper.get(this.url).then((data) => {
+  requestHelper = new RequestHelper();
+  requestHelper.get(this.url).then((data) => {
     this.data = data;
     const dataToSend = this.extractData();
     PubSub.publish("DataModel:data-ready", dataToSend);
@@ -18,9 +18,9 @@ DataModel.prototype.getData = function () {
 
 DataModel.prototype.extractData = function () {
   const extractedData = [];
-  for (data in this.data) {
+  for (data of this.data) {
     const dataCollection = [];
-    for (dataToCollect in this.dataToCollect) {
+    for (dataToCollect of this.dataToCollect) {
       dataCollection.push(data[dataToCollect]);
     }
     extractedData.push(dataCollection);
