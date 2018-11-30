@@ -11,20 +11,19 @@ const DataModel = function (url, dataToCollect) {
 DataModel.prototype.getData = function () {
   this.requestHelper.get(this.url).then((data) => {
     this.data = data;
-    const dataToSend = this.extractData();
-    PubSub.publish("DataModel:extracted-data-ready", dataToSend);
+    PubSub.publish("DataModel:extracted-data-ready", this.extractData());
   });
 };
 
 DataModel.prototype.extractData = function () {
   const extractedData = [];
-  for (data of this.data) {
+  this.data.forEach((data) => {
     const dataCollection = [];
-    for (dataToCollect of this.dataToCollect) {
+    this.dataToCollect.forEach((dataToCollect) => {
       dataCollection.push(data[dataToCollect]);
-    }
+    })
     extractedData.push(dataCollection);
-  }
+  })
   return extractedData;
 };
 

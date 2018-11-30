@@ -7,7 +7,11 @@ const DataObject = function () {
 DataObject.prototype.create = function (data, container) {
   const div = this.page.createNewElement('div', container, 'data_item', 'textContent', '')
   for (item of data) {
-  this.page.createNewElement('p', div, 'data_item_detail', 'textContent', item)
+    if (item.includes('http')  === false) {
+      this.page.createNewElement('p', div, 'data_item_detail', 'textContent', item)
+    } else {
+      this.page.createNewElement('img', div, 'data_item_image', 'src', item)
+    }
   }
 };
 

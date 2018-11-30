@@ -17,11 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
       classToSet:'custom_header',
       attr:'textContent',
       value:'Header'
+    },
+    {
+      type: 'div',
+      container:document.querySelector('body'),
+      classToSet:'data_container',
+      attr:'textContent',
+      value:''
     }
   ]);
   page.setPageDetails();
-  const dataModel = new DataModel("https://munroapi.herokuapp.com/api/munros", ['name', 'meaning']);
+  const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url']);
   dataModel.getData();
-  const dataList = new DataList();
+  const dataList = new DataList('data_container');
   dataList.bindEvents();
 });
