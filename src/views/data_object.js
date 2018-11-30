@@ -11,7 +11,8 @@ DataObject.prototype.create = function (data, container) {
     if (item.includes('http')  === false) {
       this.page.createNewElement('p', div, 'data_item_detail', 'textContent', item)
     } else {
-      this.page.createNewElement('img', div, 'data_item_image', 'src', item)
+      const figure = this.page.createNewElement('figure', div, 'data_item_image_container', 'textContent', '');
+      this.page.createNewElement('img', figure, 'data_item_image', 'src', item)
     }
   }
 };

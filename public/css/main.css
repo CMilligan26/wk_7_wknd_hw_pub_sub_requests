@@ -15,11 +15,6 @@ header * {
   font-size: 3em;
 }
 
-img {
-  width: auto;
-  height: 15em;
-}
-
 .data_container {
   display: flex;
   align-content: center;
@@ -28,17 +23,26 @@ img {
 }
 
 .data_item {
+  width:20%;
   display: flex;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  width: 15em;
-  height: 22em;
   border-style: solid;
   border-width: small;
   border-color: black;
   margin: 1em;
+}
+
+.data_item figure {
+    height: intrinsic;
+    width: intrinsic;
+    margin: 1em;
+}
+
+.data_item img {
+    width: 50%;
 }
 
 .data_item_detail {

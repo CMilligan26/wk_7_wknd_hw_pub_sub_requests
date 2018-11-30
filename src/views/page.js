@@ -4,7 +4,6 @@ const Page = function (elementsToSet = []) {
 
 Page.prototype.setPageDetails = function () {
   for (element of this.elementsToSet) {
-    console.log(element.container);
     this.createNewElement(element.type, element.container, element.classToSet, element.attr, element.value);
   };
 };
