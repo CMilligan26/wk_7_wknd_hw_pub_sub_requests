@@ -33,7 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
       attr:'textContent',
       value:''
     }
-  ]);
+  ],
+"https://marketingweek.imgix.net/content/uploads/2017/10/20125856/BrewDog-resized-copy.jpg?auto=compress,format,&crop=faces,entropy,edges&fit=crop&q=60&w=750&h=460"
+);
   page.setPageDetails();
   const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'image_url', 'description'], 'abv');
   dataModel.getData();

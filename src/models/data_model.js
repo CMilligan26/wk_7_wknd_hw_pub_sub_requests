@@ -1,11 +1,12 @@
 const PubSub = require('../helpers/pub_sub.js')
 const RequestHelper = require('../helpers/request_helper.js')
 
-const DataModel = function (url, dataToCollect, selectData) {
+const DataModel = function (url, dataToCollect, selectData, addtionalImageUrl) {
   this.url = url;
   this.dataToCollect = dataToCollect;
   this.selectData = selectData;
   this.data = null;
+  this.addtionalImageUrl = addtionalImageUrl; //Create function if this exists to add image to extracted data and call this in the extracted data function
   this.requestHelper = new RequestHelper();
 }
 
@@ -20,6 +21,7 @@ DataModel.prototype.getData = function () {
   })
 };
 
+//rewrite with for loops in case there is only one data to collect
 DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
   const extractedData = [];
   dataToExtractFrom.forEach((data) => {
@@ -44,9 +46,13 @@ DataModel.prototype.extractSelectData = function () {
 };
 
 DataModel.prototype.filterData = function (filterBy) {
-  const filteredData = this.data.filter(data => String(data[this.selectData]) === filterBy);
+  let filteredData = null;
+  if (filterBy !== 'All') {
+    filteredData = this.data.filter(data => String(data[this.selectData]) === filterBy);
+  } else {
+    filteredData = this.data;
+  }
   return this.extractData(filteredData, this.dataToCollect);
 };
-
 
 module.exports = DataModel;
