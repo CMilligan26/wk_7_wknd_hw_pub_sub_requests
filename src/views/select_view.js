@@ -13,6 +13,9 @@ SelectView.prototype.bindEvents = function () {
     this.addSelectDefault();
     this.populate(data.detail);
   });
+  this.select.addEventListener('change', (event) => {
+    PubSub.publish('SelectView:filter-selected', event.target.value)
+  })
 };
 
 SelectView.prototype.addSelectDefault = function () {

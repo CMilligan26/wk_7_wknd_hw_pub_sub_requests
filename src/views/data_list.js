@@ -15,6 +15,7 @@ DataList.prototype.bindEvents = function () {
 };
 
 DataList.prototype.addToList = function (data_set) {
+  this.container.textContent = '';
   for (data of data_set) {
     this.dataObject.create(data, this.container);
   };
