@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 "https://geology.com/world/world-physical-map.jpg"
 );
   page.setPageDetails();
-  document.querySelector('.icon').href = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzCJ-4TEdVHAMHRDazFTvoZiMDKI5soqMViFoQ62ojQ7Qm2IE-7A";
+  document.querySelector('.icon').href = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzCJ-4TEdVHAMHRDazFTvoZiMDKI5soqMViFoQ62ojQ7Qm2IE-7A"
   const dataModel = new DataModel("https://restcountries.eu/rest/v2/all", ['name', 'flag', 'capital'], 'region');
   dataModel.getData();
   const dataList = new DataList('data_container');
