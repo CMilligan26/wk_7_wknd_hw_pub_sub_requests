@@ -11,8 +11,15 @@ header * {
   display: block;
   text-align: center;
   width: 100%;
-  margin: 1em 0 1em 0;
+  margin: 0.5em 0 0.5em 0;
   font-size: 3em;
+}
+
+.data_select {
+  display: block;
+  width: 20%;
+  margin: 0em 40% 2em 40%;
+  font-size: 1em;
 }
 
 .data_container {
