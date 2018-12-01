@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
       container:document.querySelector('head'),
       classToSet:'custom_title',
       attr:'textContent',
-      value:'Title'
+      value:'Countries'
     },
     {
       type:'h1',
       container:document.querySelector('header'),
       classToSet:'custom_header',
       attr:'textContent',
-      value:'Header'
+      value:'Countries'
     },
     {
       type: 'select',
@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
       value:''
     }
   ],
-"https://marketingweek.imgix.net/content/uploads/2017/10/20125856/BrewDog-resized-copy.jpg?auto=compress,format,&crop=faces,entropy,edges&fit=crop&q=60&w=750&h=460"
+"https://geology.com/world/world-physical-map.jpg"
 );
   page.setPageDetails();
-  const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'image_url', 'description'], 'abv');
+  const dataModel = new DataModel("https://restcountries.eu/rest/v2/all", ['name', 'flag', 'capital'], 'region');
   dataModel.getData();
   const dataList = new DataList('data_container');
   dataList.bindEvents();
-  const selectView = new SelectView('data_select', 'Alcohol Content');
+  const selectView = new SelectView('data_select', 'Region');
   selectView.bindEvents();
 });

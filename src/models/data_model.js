@@ -1,12 +1,11 @@
 const PubSub = require('../helpers/pub_sub.js')
 const RequestHelper = require('../helpers/request_helper.js')
 
-const DataModel = function (url, dataToCollect, selectData, addtionalImageUrl) {
+const DataModel = function (url, dataToCollect, selectData) {
   this.url = url;
   this.dataToCollect = dataToCollect;
   this.selectData = selectData;
   this.data = null;
-  this.addtionalImageUrl = addtionalImageUrl; //Create function if this exists to add image to extracted data and call this in the extracted data function
   this.requestHelper = new RequestHelper();
 }
 
@@ -21,22 +20,21 @@ DataModel.prototype.getData = function () {
   })
 };
 
-//rewrite with for loops in case there is only one data to collect
 DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
   const extractedData = [];
-  dataToExtractFrom.forEach((data) => {
+  for (data of dataToExtractFrom) {
     const dataCollection = [];
-    dataToCollect.forEach((dataToCollect) => {
-      if (data[dataToCollect].includes('http')) {
-        const infoName = data[dataToCollect];
+    for (item of dataToCollect) {
+      if (data[item].includes('http')) {
+        const infoName = data[item];
         dataCollection.push(infoName);
       } else {
-        const infoName = dataToCollect.charAt(0).toUpperCase() + dataToCollect.slice(1);
-        dataCollection.push(`${infoName}: ${data[dataToCollect]}`);
+        const infoName = item.charAt(0).toUpperCase() + item.slice(1);
+        dataCollection.push(`${infoName}: ${data[item]}`);
       }
-    })
+    }
     extractedData.push(dataCollection);
-  })
+  }
   return extractedData;
 };
 

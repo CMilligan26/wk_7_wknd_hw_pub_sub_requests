@@ -11,6 +11,7 @@ const DataList = function (container) {
 DataList.prototype.bindEvents = function () {
   PubSub.subscribe("DataModel:extracted-data-ready", (data) => {
     this.addToList(data.detail);
+    PubSub.publish("DataList:list-displayed",'');
   })
 };
 
