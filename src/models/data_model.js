@@ -1,5 +1,5 @@
-const PubSub = require('../helpers/pub_sub.js')
-const RequestHelper = require('../helpers/request_helper.js')
+const PubSub = require('../helpers/pub_sub.js');
+const RequestHelper = require('../helpers/request_helper.js');
 
 const DataModel = function (url, dataToCollect, selectData) {
   this.url = url;
@@ -7,7 +7,7 @@ const DataModel = function (url, dataToCollect, selectData) {
   this.selectData = selectData;
   this.data = null;
   this.requestHelper = new RequestHelper();
-}
+};
 
 DataModel.prototype.getData = function () {
   this.requestHelper.get(this.url).then((data) => {
@@ -17,24 +17,25 @@ DataModel.prototype.getData = function () {
   });
   PubSub.subscribe('SelectView:filter-selected', (selected) => {
     PubSub.publish('DataModel:extracted-data-ready', this.filterData(selected.detail));
-  })
+  });
 };
 
 DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
   const extractedData = [];
-  for (data of dataToExtractFrom) {
+  for (const data of dataToExtractFrom) {
     const dataCollection = [];
-    for (item of dataToCollect) {
+    for (const item of dataToCollect) {
+      let infoName = null;
       if (data[item].includes('http')) {
-        const infoName = data[item];
+        infoName = data[item];
         dataCollection.push(infoName);
       } else {
-        const infoName = item.charAt(0).toUpperCase() + item.slice(1);
+        infoName = item.charAt(0).toUpperCase() + item.slice(1);
         dataCollection.push(`${infoName}: ${data[item]}`);
-      }
-    }
+      };
+    };
     extractedData.push(dataCollection);
-  }
+  };
   return extractedData;
 };
 
@@ -49,7 +50,7 @@ DataModel.prototype.filterData = function (filterBy) {
     filteredData = this.data.filter(data => String(data[this.selectData]) === filterBy);
   } else {
     filteredData = this.data;
-  }
+  };
   return this.extractData(filteredData, this.dataToCollect);
 };
 

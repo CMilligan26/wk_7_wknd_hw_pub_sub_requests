@@ -1,5 +1,5 @@
-const PubSub = require('../helpers/pub_sub.js')
-const Page = require('./page.js')
+const PubSub = require('../helpers/pub_sub.js');
+const Page = require('./page.js');
 
 const SelectView = function (select, filterName) {
   this.select = document.querySelector(`.${select}`);
@@ -14,8 +14,8 @@ SelectView.prototype.bindEvents = function () {
     this.populate(data.detail);
   });
   this.select.addEventListener('change', (event) => {
-    PubSub.publish('SelectView:filter-selected', event.target.value)
-  })
+    PubSub.publish('SelectView:filter-selected', event.target.value);
+  });
 };
 
 SelectView.prototype.addSelectDefault = function () {
@@ -25,13 +25,13 @@ SelectView.prototype.addSelectDefault = function () {
 };
 
 SelectView.prototype.addSelectAll = function () {
-  const allOption = this.page.createNewElement('option', this.select, '', 'textContent', 'All');
+  this.page.createNewElement('option', this.select, '', 'textContent', 'All');
 };
 
 SelectView.prototype.populate = function (selectedOptions) {
   selectedOptions.forEach((option) => {
     this.page.createNewElement('option', this.select, '', 'textContent', option);
-  })
+  });
 };
 
 module.exports = SelectView;

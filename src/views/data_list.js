@@ -1,21 +1,21 @@
-const PubSub = require('../helpers/pub_sub.js')
-const Page = require('./page.js')
+const PubSub = require('../helpers/pub_sub.js');
+const Page = require('./page.js');
 const DataObject = require('./data_object.js');
 
 const DataList = function (container) {
   this.container = document.querySelector(`.${container}`);
   this.dataObject = new DataObject();
-}
+};
 
 DataList.prototype.bindEvents = function () {
   PubSub.subscribe("DataModel:extracted-data-ready", (data) => {
     this.addToList(data.detail);
-  })
+  });
 };
 
 DataList.prototype.addToList = function (data_set) {
   this.container.textContent = '';
-  for (data of data_set) {
+  for (const data of data_set) {
     this.dataObject.create(data, this.container);
   };
 };
