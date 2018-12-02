@@ -42,10 +42,10 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
 DataModel.prototype.getItemName = function (item) {
   const itemName = item.split('.');
   let fixedName = '';
-  for (word of itemName) {
+  for (const word of itemName) {
     fixedName += word.charAt(0).toUpperCase() + word.slice(1).replace('_', ' ');
     fixedName += ' ';
-  }
+  };
   return fixedName;
 };
 
@@ -56,16 +56,16 @@ DataModel.prototype.getItem = function (data, item) {
   }
   else {
     itemValue = String(data[item]);
-  }
+  };
   return itemValue;
 };
 
 DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
   const splitPath = attrPath.split('.');
   let fullPath = bigObject;
-  for (path of splitPath) {
+  for (const path of splitPath) {
     fullPath = fullPath[path];
-  }
+  };
   return fullPath;
 };
 
