@@ -26,17 +26,47 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
     const dataCollection = [];
     for (const item of dataToCollect) {
       let infoName = null;
-      if (data[item].includes('http')) {
-        infoName = data[item];
-        dataCollection.push(infoName);
+      itemValue = this.getItem(data, item);
+      if (itemValue.includes('http')) {
+        dataCollection.push(itemValue);
       } else {
-        infoName = item.charAt(0).toUpperCase() + item.slice(1).replace('_', ' ');
-        dataCollection.push(`${infoName}: ${data[item]}`);
+        const infoName = this.getItemName(item);
+        dataCollection.push(`${infoName}: ${itemValue}`);
       };
     };
     extractedData.push(dataCollection);
   };
   return extractedData;
+};
+
+DataModel.prototype.getItemName = function (item) {
+  const itemName = item.split('.');
+  let fixedName = '';
+  for (word of itemName) {
+    fixedName += word.charAt(0).toUpperCase() + word.slice(1).replace('_', ' ');
+    fixedName += ' ';
+  }
+  return fixedName;
+};
+
+DataModel.prototype.getItem = function (data, item) {
+  let itemValue = null;
+  if (item.includes('.')) {
+    itemValue = String(this.nestedAccess(data, item));
+  }
+  else {
+    itemValue = String(data[item]);
+  }
+  return itemValue;
+};
+
+DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
+  const splitPath = attrPath.split('.');
+  let fullPath = bigObject;
+  for (path of splitPath) {
+    fullPath = fullPath[path];
+  }
+  return fullPath;
 };
 
 DataModel.prototype.extractSelectData = function () {
