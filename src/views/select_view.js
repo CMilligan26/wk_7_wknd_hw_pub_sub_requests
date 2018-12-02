@@ -3,7 +3,6 @@ const Page = require('./page.js')
 
 const SelectView = function (select, filterName) {
   this.select = document.querySelector(`.${select}`);
-  this.select.className += " data_select";
   this.filterName = filterName;
   this.page = new Page();
 }

@@ -9,9 +9,7 @@ Page.prototype.setPageDetails = function () {
   for (element of this.elementsToSet) {
     this.createNewElement(element.type, element.container, element.classToSet, element.attr, element.value);
   };
-  PubSub.subscribe('DataList:list-displayed', () => {
     this.setBackgroundImage();
-  });
 };
 
 Page.prototype.createNewElement = function (type, container, classToSet, attr, value) {
@@ -23,8 +21,7 @@ Page.prototype.createNewElement = function (type, container, classToSet, attr, v
 };
 
 Page.prototype.setBackgroundImage = function () {
-  const html = document.querySelector('html');
-  html.style.backgroundImage = `url(${this.backgroundImage})`;
+  document.querySelector('html').style.backgroundImage = `url(${this.backgroundImage})`;
 };
 
 module.exports = Page;

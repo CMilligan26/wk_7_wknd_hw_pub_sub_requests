@@ -4,14 +4,12 @@ const DataObject = require('./data_object.js');
 
 const DataList = function (container) {
   this.container = document.querySelector(`.${container}`);
-  this.container.className += ' data_container';
   this.dataObject = new DataObject();
 }
 
 DataList.prototype.bindEvents = function () {
   PubSub.subscribe("DataModel:extracted-data-ready", (data) => {
     this.addToList(data.detail);
-    PubSub.publish("DataList:list-displayed",'');
   })
 };
 
