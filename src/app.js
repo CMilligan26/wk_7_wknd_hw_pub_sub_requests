@@ -27,8 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
       value:'Countries'
     },
     {
+      type: 'label',
+      container:document.querySelector('header'),
+      classToSet:'filter_label',
+      attr:'textContent',
+      value:'Display By Region:'
+    },
+    {
       type: 'select',
-      container:document.querySelector('body'),
+      container:document.querySelector('header'),
       classToSet:'data_select',
       attr:'textContent',
       value:''
@@ -42,13 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ],
 "https://geology.com/world/world-physical-map.jpg",
-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzCJ-4TEdVHAMHRDazFTvoZiMDKI5soqMViFoQ62ojQ7Qm2IE-7A"
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzCJ-4TEdVHAMHRDazFTvoZiMDKI5soqMViFoQ62ojQ7Qm2IE-7A",
+'filter_label',
+'data_select'
 );
   page.setPageDetails();
   const dataModel = new DataModel("https://restcountries.eu/rest/v2/all", ['name', 'flag', 'capital'], 'region');
   dataModel.getData();
   const dataList = new DataList('data_container');
   dataList.bindEvents();
-  const selectView = new SelectView('data_select', 'Region');
+  const selectView = new SelectView('data_select');
   selectView.bindEvents();
 });

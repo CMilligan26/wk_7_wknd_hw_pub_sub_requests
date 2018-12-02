@@ -1,9 +1,11 @@
 const PubSub = require('../helpers/pub_sub.js');
 
-const Page = function (elementsToSet, backgroundImage, iconImage) {
+const Page = function (elementsToSet, backgroundImage, iconImage, labelClass, selectClass) {
   this.elementsToSet = elementsToSet;
   this.backgroundImage = backgroundImage;
   this.iconImage = iconImage;
+  this.labelClass = labelClass;
+  this.selectClass = selectClass;
 };
 
 Page.prototype.setPageDetails = function () {
@@ -12,6 +14,7 @@ Page.prototype.setPageDetails = function () {
   };
     this.setBackgroundImage();
     this.setIconImage();
+    this.setSelectLabel();
 };
 
 Page.prototype.createNewElement = function (type, container, classToSet, attr, value) {
@@ -28,6 +31,11 @@ Page.prototype.setBackgroundImage = function () {
 
 Page.prototype.setIconImage = function () {
   document.querySelector('.icon').href = this.iconImage;
+};
+
+Page.prototype.setSelectLabel = function () {
+  document.querySelector(`.${this.selectClass}`).id = "filter_select";
+  document.querySelector(`.${this.labelClass}`).for = "filter_select";
 };
 
 module.exports = Page;

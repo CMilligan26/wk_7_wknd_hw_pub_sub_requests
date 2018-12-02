@@ -1,15 +1,13 @@
 const PubSub = require('../helpers/pub_sub.js');
 const Page = require('./page.js');
 
-const SelectView = function (select, filterName) {
+const SelectView = function (select) {
   this.select = document.querySelector(`.${select}`);
-  this.filterName = filterName;
   this.page = new Page();
 }
 
 SelectView.prototype.bindEvents = function () {
   PubSub.subscribe("DataModel:select-data-ready", (data) => {
-    this.addSelectDefault();
     this.addSelectAll();
     this.populate(data.detail);
   });
@@ -18,14 +16,9 @@ SelectView.prototype.bindEvents = function () {
   });
 };
 
-SelectView.prototype.addSelectDefault = function () {
-  const defaultOption = this.page.createNewElement('option', this.select, '', 'textContent', `Choose ${this.filterName}`);
-  defaultOption.selected = 'true';
-  defaultOption.disabled = 'true';
-};
-
 SelectView.prototype.addSelectAll = function () {
-  this.page.createNewElement('option', this.select, '', 'textContent', 'All');
+  const defaultOption = this.page.createNewElement('option', this.select, '', 'textContent', 'All');
+  defaultOption.selected = 'true';
 };
 
 SelectView.prototype.populate = function (selectedOptions) {

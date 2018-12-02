@@ -23,6 +23,10 @@ header * {
   font-size: 5em;
 }
 
+header label {
+  font-size: 2em;
+}
+
 .data_select {
   display: block;
   width: 20%;
