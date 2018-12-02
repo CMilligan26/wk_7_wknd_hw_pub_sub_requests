@@ -63,10 +63,29 @@ DataModel.prototype.getItem = function (data, item) {
 DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
   const splitPath = attrPath.split('.');
   let fullPath = bigObject;
+  let iterator = 0;
+  let isArray = false;
   for (const path of splitPath) {
     fullPath = fullPath[path];
+    iterator += 1;
+    if (fullPath.constructor.name === 'Array') {
+      isArray = true;
+      break;
+    };
   };
-  return fullPath;
+  if (isArray === false) {
+    return fullPath;
+  } else {
+    return this.nestedArrayAccess(fullPath, splitPath, iterator);
+  }
+};
+
+DataModel.prototype.nestedArrayAccess = function (fullPath, splitPath, iterator) {
+  let requiredInfo = '';
+  for (const item of fullPath) {
+      requiredInfo += item[splitPath[iterator]];
+    };
+  return requiredInfo;
 };
 
 DataModel.prototype.extractSelectData = function () {
