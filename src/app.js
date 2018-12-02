@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       container:document.querySelector('head'),
       classToSet:'custom_title',
       attr:'textContent',
-      value:'Countries'
+      value:'Brewdog Beers'
     },
     {
       type:'link',
@@ -24,14 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
       container:document.querySelector('header'),
       classToSet:'custom_header',
       attr:'textContent',
-      value:'Countries'
+      value:'Brewdog Beers'
     },
     {
       type: 'label',
       container:document.querySelector('header'),
       classToSet:'filter_label',
       attr:'textContent',
-      value:'Display By Region:'
+      value:'Display By ABV:'
     },
     {
       type: 'select',
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
       value:''
     }
   ],
-"https://geology.com/world/world-physical-map.jpg",
-"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzCJ-4TEdVHAMHRDazFTvoZiMDKI5soqMViFoQ62ojQ7Qm2IE-7A",
+"https://www.brewdog.com/admin/js/libs/tinymce/plugins/moxiemanager/data/files/BLOG%20PHOTOS/Christmas_5.MixedCase.jpg",
+"https://www.iconexperience.com/_img/v_collection_png/256x256/shadow/beer_mug.png",
 'filter_label',
 'data_select'
 );
   page.setPageDetails();
-  const dataModel = new DataModel("https://restcountries.eu/rest/v2/all", ['name', 'flag', 'capital'], 'region');
+  const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url', 'description', 'first_brewed'], 'abv');
   dataModel.getData();
   const dataList = new DataList('data_container');
   dataList.bindEvents();

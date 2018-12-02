@@ -30,7 +30,7 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
         infoName = data[item];
         dataCollection.push(infoName);
       } else {
-        infoName = item.charAt(0).toUpperCase() + item.slice(1);
+        infoName = item.charAt(0).toUpperCase() + item.slice(1).replace('_', ' ');
         dataCollection.push(`${infoName}: ${data[item]}`);
       };
     };
