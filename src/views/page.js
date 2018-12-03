@@ -12,9 +12,9 @@ Page.prototype.setPageDetails = function () {
   for (const element of this.elementsToSet) {
     this.createNewElement(element.type, element.container, element.classToSet, element.attr, element.value);
   };
-    this.setBackgroundImage();
-    this.setIconImage();
-    this.setSelectLabel();
+  this.setBackgroundImage();
+  this.setIconImage();
+  this.setSelectLabel();
 };
 
 Page.prototype.createNewElement = function (type, container, classToSet, attr, value) {

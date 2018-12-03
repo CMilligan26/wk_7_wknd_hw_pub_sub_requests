@@ -41,12 +41,12 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
 DataModel.prototype.getItemName = function (item) {
   const itemName = item.split('.');
   let fixedName = '';
-  for (label of itemName) {
-  fixedName += label.charAt(0).toUpperCase() + label.slice(1).replace('_', ' ');
-  fixedName += ' ';
-  if (itemName.indexOf(label) === itemName.length-2) {
-    break;
-  };
+  for (const label of itemName) {
+    fixedName += label.charAt(0).toUpperCase() + label.slice(1).replace('_', ' ');
+    fixedName += ' ';
+    if (itemName.indexOf(label) === itemName.length-2) {
+      break;
+    };
   };
   fixedName += ': ';
   return fixedName;
@@ -80,22 +80,22 @@ DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
     return `${this.getItemName(splitPath[iterator-1])} ${fullPath}`;
   } else {
     return this.nestedArrayAccess(fullPath, splitPath[iterator]);
-  }
+  };
 };
 
 DataModel.prototype.nestedArrayAccess = function (objectArray, itemToExtract) {
   const itemsToExtractArray = itemToExtract.split('/');
   let requiredInfo = [];
   for (const object of objectArray) {
-    for (item of itemsToExtractArray) {
+    for (const item of itemsToExtractArray) {
       if (object[item].constructor.name === 'Object') {
         const keys = Object.keys(object[item])
-        for (key of keys) {
-        requiredInfo.push(this.nestedAccess(object[item], key));
+        for (const key of keys) {
+          requiredInfo.push(this.nestedAccess(object[item], key));
         }
       } else {
-      requiredInfo.push(`${this.getItemName(item)} ${object[item]} `);
-    };
+        requiredInfo.push(`${this.getItemName(item)} ${object[item]} `);
+      };
     };
   };
   return requiredInfo;

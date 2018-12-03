@@ -48,16 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
       value:''
     }
   ],
-"https://www.brewdog.com/admin/js/libs/tinymce/plugins/moxiemanager/data/files/BLOG%20PHOTOS/Christmas_5.MixedCase.jpg",
-"https://www.iconexperience.com/_img/v_collection_png/256x256/shadow/beer_mug.png",
-'filter_label',
-'data_select'
+  "https://www.brewdog.com/admin/js/libs/tinymce/plugins/moxiemanager/data/files/BLOG%20PHOTOS/Christmas_5.MixedCase.jpg",
+  "https://www.iconexperience.com/_img/v_collection_png/256x256/shadow/beer_mug.png",
+  'filter_label',
+  'data_select'
 );
-  page.setPageDetails();
-  const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url', 'description', 'first_brewed', `ingredients.malt.name/amount`, 'volume.value', 'volume.unit', 'method.fermentation.temp.value', 'method.fermentation.temp.unit'], 'abv');
-  dataModel.getData();
-  const dataList = new DataList('data_container');
-  dataList.bindEvents();
-  const selectView = new SelectView('data_select');
-  selectView.bindEvents();
+page.setPageDetails();
+const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url', 'description', 'first_brewed'], 'abv');
+dataModel.getData();
+const dataList = new DataList('data_container');
+dataList.bindEvents();
+const selectView = new SelectView('data_select');
+selectView.bindEvents();
 });
