@@ -8,7 +8,15 @@ DataObject.prototype.create = function (data, container) {
   const div = this.page.createNewElement('div', container, 'data_item', 'textContent', '');
   for (const item of data) {
     if (item.includes('http')  === false) {
-      this.page.createNewElement('p', div, 'data_item_detail', 'textContent', item);
+      for (detail of item) {
+        if (detail.constructor.name !== 'Array') {
+          this.page.createNewElement('p', div, 'data_item_detail', 'textContent', detail);
+        } else {
+          for (line of detail) {
+            this.page.createNewElement('p', div, 'data_item_detail', 'textContent', line)
+          };
+        }
+      }
     }
     else {
       const figure = this.page.createNewElement('figure', div, 'data_item_image_container', 'textContent', '');

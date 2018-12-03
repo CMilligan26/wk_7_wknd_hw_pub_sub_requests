@@ -25,13 +25,12 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
   for (const data of dataToExtractFrom) {
     const dataCollection = [];
     for (const item of dataToCollect) {
-      let infoName = null;
       itemValue = this.getItem(data, item);
       if (itemValue.includes('http')) {
         dataCollection.push(itemValue);
       } else {
         const infoName = this.getItemName(item);
-        dataCollection.push(`${infoName}: ${itemValue}`);
+        dataCollection.push([infoName, itemValue]);
       };
     };
     extractedData.push(dataCollection);
@@ -42,20 +41,24 @@ DataModel.prototype.extractData = function (dataToExtractFrom, dataToCollect) {
 DataModel.prototype.getItemName = function (item) {
   const itemName = item.split('.');
   let fixedName = '';
-  for (const word of itemName) {
-    fixedName += word.charAt(0).toUpperCase() + word.slice(1).replace('_', ' ');
-    fixedName += ' ';
+  for (label of itemName) {
+  fixedName += label.charAt(0).toUpperCase() + label.slice(1).replace('_', ' ');
+  fixedName += ' ';
+  if (itemName.indexOf(label) === itemName.length-2) {
+    break;
   };
+  };
+  fixedName += ': ';
   return fixedName;
 };
 
 DataModel.prototype.getItem = function (data, item) {
   let itemValue = null;
   if (item.includes('.')) {
-    itemValue = String(this.nestedAccess(data, item));
+    itemValue = this.nestedAccess(data, item);
   }
   else {
-    itemValue = String(data[item]);
+    itemValue = data[item];
   };
   return itemValue;
 };
@@ -74,17 +77,27 @@ DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
     };
   };
   if (isArray === false) {
-    return fullPath;
+    return `${this.getItemName(splitPath[iterator-1])} ${fullPath}`;
   } else {
-    return this.nestedArrayAccess(fullPath, splitPath, iterator);
+    return this.nestedArrayAccess(fullPath, splitPath[iterator]);
   }
 };
 
-DataModel.prototype.nestedArrayAccess = function (fullPath, splitPath, iterator) {
-  let requiredInfo = '';
-  for (const item of fullPath) {
-      requiredInfo += item[splitPath[iterator]];
+DataModel.prototype.nestedArrayAccess = function (objectArray, itemToExtract) {
+  const itemsToExtractArray = itemToExtract.split('/');
+  let requiredInfo = [];
+  for (const object of objectArray) {
+    for (item of itemsToExtractArray) {
+      if (object[item].constructor.name === 'Object') {
+        const keys = Object.keys(object[item])
+        for (key of keys) {
+        requiredInfo.push(this.nestedAccess(object[item], key));
+        }
+      } else {
+      requiredInfo.push(`${this.getItemName(item)} ${object[item]} `);
     };
+    };
+  };
   return requiredInfo;
 };
 
