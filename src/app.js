@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   'data_select'
 );
 page.setPageDetails();
-const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url', 'description', 'first_brewed'], 'abv');
+const dataModel = new DataModel("https://api.punkapi.com/v2/beers", ['name', 'tagline', 'image_url', 'description', `ingredients.malt.name`, 'ingredients.hops.name'], 'abv');
 dataModel.getData();
 const dataList = new DataList('data_container');
 dataList.bindEvents();

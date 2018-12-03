@@ -64,11 +64,14 @@ DataModel.prototype.getItem = function (data, item) {
 };
 
 DataModel.prototype.nestedAccess = function (bigObject, attrPath) {
-  const splitPath = attrPath.split('.');
+  let splitPath = attrPath.split('.');
   let fullPath = bigObject;
   let iterator = 0;
   let isArray = false;
   for (const path of splitPath) {
+    if (fullPath[path] === null) {
+      break;
+    };
     fullPath = fullPath[path];
     iterator += 1;
     if (fullPath.constructor.name === 'Array') {
